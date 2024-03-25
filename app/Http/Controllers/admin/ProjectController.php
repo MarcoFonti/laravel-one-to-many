@@ -35,8 +35,11 @@ class ProjectController extends Controller
         /* PAGINAZIONE A 10 ALLA VOLTA E MANTIENI LINK SULL'URL */
         $projects = $query->paginate(10)->withQueryString();
 
+        /* RECUPERO TUTTE LE TIPOLOGIE */
+        $types = Type::all();
+        
         /* RETURN NELLA STESSA PAGINA */
-        return view('admin.projects.index', compact('projects', 'filter'));
+        return view('admin.projects.index', compact('projects', 'filter', 'types'));
     }
 
     /**
