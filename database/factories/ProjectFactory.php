@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Type;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -31,12 +33,18 @@ class ProjectFactory extends Factory
         $file = fake()->image(null ,350, 350);
 
         /* SALVO FILE */
-        $url = Storage::putFileAs('project_images', $file, "$slug.png"); 
+        $url = Storage::putFileAs('project_images', $file, "$slug.png");
+
+        /* CREO UN ARRAY CON DENTRO GLI ID DELLE MIEI TIPOLOGIE */
+        $type_ids = Type::pluck('id')->toArray();
+
+        /* AGGIUNGO ALL'ARRAY LA TIPOLOGIA NULLA */
+        $type_ids[] = null;
 
         return [
             'title' => $title,
             'slug' => $slug,
-            'type_id' => fake()->randomBetween(1, 10),
+            'type_id' => Arr::random($type_ids),
             'content' => fake()->paragraphs(15, true),
             'image' => $url,
             'is_published' => fake()->boolean()

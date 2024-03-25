@@ -37,7 +37,7 @@
                             <h6 class="card-subtitle mb-3 text-body-secondary">{{ $project->getCreatedAt() }}</h6>
                             <p><strong class="text-uppercase">Tipologia:</strong>
                                 @if ($project->type)
-                                    <span class="badge" style="background-color: {{ $project->type->color }}">{{ $project->category->label }}</span>
+                                    <span class="badge" style="background-color: {{ $project->type->color }}">{{ $project->type->label }}</span>
                                 @else
                                     Nessuna
                                 @endif
