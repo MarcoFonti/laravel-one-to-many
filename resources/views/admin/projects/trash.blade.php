@@ -14,6 +14,7 @@
                         <th class="text-warning" scope="col">#</th>
                         <th class="text-warning" scope="col">Titolo</th>
                         <th class="text-warning" scope="col">Slug</th>
+                        <th class="text-warning" scope="col">Tipologia</th>
                         <th class="text-warning" scope="col">Stato</th>
                         <th class="text-warning" scope="col">Data creazione</th>
                         <th class="text-warning" scope="col">Ultima modifica</th>
@@ -26,6 +27,9 @@
                             <th scope="row">{{ $project->id }}</th>
                             <td>{{ $project->title }}</td>
                             <td>{{ $project->slug }}</td>
+                            <td>
+                                <span @if ($project->type) class="badge" style="background-color: {{ $project->type->color }}" @endif >{{ $project->type ? $project->type->label : '-' }}</span>
+                            </td>
                             <td>{{ $project->is_published ? 'Pubblicato' : 'Bozza' }}</td>
                             <td>{{ $project->getCreatedAt() }}</td>
                             <td>{{ $project->getUpdatedAt() }}</td>

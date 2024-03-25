@@ -53,7 +53,27 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-11">
+                <div class="col-3">
+                    <div class="mb-3">
+                        <label for="type_id" class="form-label">Selezione Tipologia</label>
+                        <select name="type_id" id="type_id" class="form-select @error('type_id') is-invalid 
+                        @elseif(old('type_id')) is-valid 
+                        @enderror">
+                            <option value="">Nessuna</option>
+                            @foreach ($types as $type)
+                                <option value="{{ $type->id }}" @if (old('type_id', '') == $type->id)
+                                    selected
+                                @endif>{{ $type->label }}</option>
+                            @endforeach
+                        </select>
+                        @error('type_id')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-8">
                     <div class="mb-3">
                         <label for="image" class="form-label">Immagine Progetto</label>
                         <input type="file"
@@ -71,9 +91,7 @@
                 </div>
                 <div class="col-1">
                     <div class="mb-5">
-                        <img src="{{ old('image') 
-                        ? asset('storage/' . old('image')) 
-                        : 'https://marcolanci.it/boolean/assets/placeholder.png' }}"
+                        <img src="{{ old('image') ? asset('storage/' . old('image')) : 'https://marcolanci.it/boolean/assets/placeholder.png' }}"
                             class="img-fluid" alt="Immageni Progetto" id="preview">
                     </div>
                 </div>

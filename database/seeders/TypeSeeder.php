@@ -16,7 +16,7 @@ class TypeSeeder extends Seeder
     public function run(Generator $faker): void
     {
         /* CREO TIPOLOGIE DEL PROGETTO */
-        $labels = ['Crowdfunding', 'E-commerce', 'Consegna di Cibo', 'Social Media', 'Messaggistica Chat', 'Analisi dei Dati'];
+        $labels = ['E-commerce', 'Consegna di Cibo', 'Social Media', 'Messaggistica Chat', 'Analisi dei Dati'];
 
         /* CICLO SUI LABELS */
         foreach($labels as $label){

@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         ]); */
 
         /* FAKE PROJECT */
-        \App\Models\Project::factory(3)->create();
+        \App\Models\Project::factory(10)->create();
 
         /* TYPESEEDER */
         $this->call(TypeSeeder::class);

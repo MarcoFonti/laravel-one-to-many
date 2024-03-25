@@ -55,10 +55,31 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-11">
+                <div class="col-3">
+                    <div class="mb-3">
+                        <label for="type_id" class="form-label">Selezione Tipologia</label>
+                        <select name="type_id" id="type_id" class="form-select @error('type_id') is-invalid 
+                        @elseif(old('type_id', '')) is-valid 
+                        @enderror">
+                            <option value="">Nessuna</option>
+                            @foreach ($types as $type)
+                                <option value="{{ $type->id }}" @if (old('type_id', $project->type?->id) == $type->id)
+                                    selected
+                                @endif>{{ $type->label }}</option>
+                            @endforeach
+                        </select>
+                        @error('type_id')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-8">
                     <div class="mb-3">
                         <label for="image" class="form-label">Immagine Progetto</label>
-                        <div id="container-change-image" class="input-group @if (!$project->image) d-none @endif">
+                        <div id="container-change-image"
+                            class="input-group @if (!$project->image) d-none @endif">
                             <button class="btn btn-secondary" type="button" id="button-change">Cambia File</button>
                             <input type="text" class="form-control" value="{{ old('image', $project->image) }}" disabled>
                         </div>
