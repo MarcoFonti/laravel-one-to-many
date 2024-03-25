@@ -15,7 +15,7 @@
                 <p>{{ $project->content }}</p>
                 <p><strong class="text-uppercase">Tipologia:</strong>
                     @if ($project->type)
-                        <span class="badge" style="background-color: {{ $project->type->color }}">{{ $project->category->label }}</span>
+                        <span class="badge" style="background-color: {{ $project->type->color }}">{{ $project->type->label }}</span>
                     @else
                         Nessuna
                     @endif

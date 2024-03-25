@@ -63,7 +63,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7">
+                            <td colspan="8">
                                 <h3>Non ci sono progetti nel cestino</h3>
                             </td>
                         </tr>
