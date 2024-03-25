@@ -97,6 +97,24 @@
                 {{ $projects->links() }}
             @endif
         </div>
+        <div class="card w-50 m-auto mt-4 mb-4 p-4 shadow-lg">
+            <h4 class="text-center text-uppercase text-danger">Progetti per tipologia</h4>
+            <ol class="list-group list-group- list-group-item-dark">
+                @foreach ($types as $type)
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                  <div>
+                    <div class="fw-bold">{{ $type->label }}</div>
+                        @forelse ($type->projects as $project)
+                            <small class="ms-3">- <a href="{{ route('admin.projects.show', $project->id) }}">{{ $project->title }} <br></a></small>
+                        @empty
+                            <small class="ms-3">- Nessun Progetto <br></small>
+                        @endforelse
+                  </div>
+                  <span class="badge text-bg-primary rounded-pill">{{ count($type->projects) }}</span>
+                </li>
+                @endforeach
+            </ol>
+        </div>
     </div>
 @endsection
 
