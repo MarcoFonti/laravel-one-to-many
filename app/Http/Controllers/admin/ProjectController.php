@@ -155,7 +155,7 @@ class ProjectController extends Controller
         };
 
         /* SALVATAGGIO */
-        $project->save();
+        $project->update($data);
 
         /* RETURN SULLA SHOW CON ID E CREO MESSAGGIO ALERT */
         return to_route('admin.projects.show', $project->id)->with('type', 'info')->with('message', "Elemento ( $project->title ) aggiornato");
