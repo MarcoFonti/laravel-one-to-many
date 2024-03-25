@@ -13,13 +13,13 @@
                 <img src="{{ $project->assetUrl() }}" alt="{{ $project->title }}" class="me-3 float-start mt-1 img-fluid">
             @endif
             <p>{{ $project->content }}</p>
-            <p><strong class="text-uppercase">Tipologia:</strong>
+            <div class="d-flex align-items-center gap-1 mb-2"><strong class="text-uppercase">Tipologia:</strong>
                 @if ($project->type)
                     <span class="badge" style="background-color: {{ $project->type->color }}">{{ $project->type->label }}</span>
                 @else
                     Nessuna
                 @endif
-            </p>
+            </div>
             <div class="d-flex align-items-center text-uppercase gap-1">
                 <strong>Data creazione: </strong> <span class="me-3">{{ $project->getCreatedAt() }}</span>
                 <strong>Ultima modifica: </strong> <span>{{ $project->getUpdatedAt() }}</span>
