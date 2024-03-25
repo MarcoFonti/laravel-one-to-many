@@ -15,7 +15,7 @@ class Project extends Model
     use SoftDeletes;
 
     /* ASSEGNO VALORI DI MASSA */
-    protected $fillable = ['title', 'slug', 'content', 'image', 'is_published'];
+    protected $fillable = ['title', 'slug', 'content', 'image', 'is_published', 'type_id'];
 
     /* FUNZIONE DI DATA CREAZIONE */
     public function getCreatedAt()

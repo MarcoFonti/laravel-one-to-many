@@ -32,6 +32,7 @@ class UpdateProjectRequest extends FormRequest
             'content' => 'required|string',
             'image' => 'nullable|image',
             'is_published' => 'nullable|boolean',
+            'type_id' => 'nullable|exists:tipes,id'
         ];
     }
 
@@ -49,6 +50,7 @@ class UpdateProjectRequest extends FormRequest
             'title.unique' => "Esiste già questo nome {$data['title']}",
             'content.required' => 'Il contenuto è obbligatorio ',
             'image.image' => 'Il file inserito non è un\'immagine',
+            'type_id.exists' => 'Categoria non valida',
         ];
     }
 }

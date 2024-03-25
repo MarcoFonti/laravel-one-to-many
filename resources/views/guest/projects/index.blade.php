@@ -35,6 +35,13 @@
                         <div class="col">
                             <h5 class="card-title mb-2 text-uppercase">{{ $project->title }}</h5>
                             <h6 class="card-subtitle mb-3 text-body-secondary">{{ $project->getCreatedAt() }}</h6>
+                            <p><strong class="text-uppercase">Tipologia:</strong>
+                                @if ($project->type)
+                                    <span class="badge" style="background-color: {{ $project->type->color }}">{{ $project->category->label }}</span>
+                                @else
+                                    Nessuna
+                                @endif
+                            </p>
                             <p class="card-text">{{ $project->content }}</p>
                         </div>
                     </div>

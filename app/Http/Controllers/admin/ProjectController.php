@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
+use App\Models\Type;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -42,9 +43,12 @@ class ProjectController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
+    {   
+        /* RECUPERO SOLO CIO CHE MI SERVE DAL MODELLO */
+        $types = Type::select('label', 'id')->get();
+        
         /* RETURN NELLA STESSA PAGINA */
-        return view('admin.projects.create');
+        return view('admin.projects.create', compact('types'));
     }
 
     /**
@@ -100,8 +104,10 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
+        /* RECUPERO SOLO CIO CHE MI SERVE DAL MODELLO */
+        $types = Type::select('label', 'id')->get();
         /* RETURN NELLA STESSA PAGINA */
-        return view('admin.projects.edit', compact('project'));
+        return view('admin.projects.edit', compact('project', 'types'));
     }
 
     /**

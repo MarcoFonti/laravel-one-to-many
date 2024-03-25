@@ -36,6 +36,7 @@ class ProjectFactory extends Factory
         return [
             'title' => $title,
             'slug' => $slug,
+            'type_id' => fake()->randomBetween(1, 10),
             'content' => fake()->paragraphs(15, true),
             'image' => $url,
             'is_published' => fake()->boolean()
