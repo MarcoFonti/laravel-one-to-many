@@ -20,8 +20,11 @@ class ProjectController extends Controller
     public function index(Request $request)
     {
 
-        /* RECUPERI VALORE DELLA QUERY */
+        /* RECUPERI VALORE DELLA QUERY PER I PUBBLICATI E BOZZE */
         $filter = $request->query('filter');
+
+        /* RECUPERI VALORE DELLA QUERY PER TIPOLOGIE */
+        $type_filter = $request->query('type_filter');
 
         /* PREPARO LA QUERY DEL MODELLO IN ORDINE DESCRESCENTE MODIFICA E CREAZIONE */
         $query = Project::orderByDesc('updated_at')->orderByDesc('created_at');
@@ -31,6 +34,11 @@ class ProjectController extends Controller
             $value = $filter === 'published';
             $query->whereIsPublished($value);
         }
+        
+        /* SE LA VARIABILE TYPE_FILTER ESISTE IN BASE AL VALORE ID FILTRA */
+        if($type_filter) {
+            $query->where('type_id', $type_filter);
+        }
 
         /* PAGINAZIONE A 10 ALLA VOLTA E MANTIENI LINK SULL'URL */
         $projects = $query->paginate(10)->withQueryString();
@@ -39,7 +47,7 @@ class ProjectController extends Controller
         $types = Type::all();
         
         /* RETURN NELLA STESSA PAGINA */
-        return view('admin.projects.index', compact('projects', 'filter', 'types'));
+        return view('admin.projects.index', compact('projects', 'filter', 'types', 'type_filter'));
     }
 
     /**

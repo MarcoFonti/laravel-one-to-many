@@ -7,13 +7,25 @@
         <header class="d-flex justify-content-between align-items-center">
             <h1 class="mt-4 text-uppercase text-danger">Lista Progetti</h1>
             <div class="d-flex justify-content-center align-items-center gap-3 mt-4">
-                {{-- Filtro --}}
+                {{-- FITRLI --}}
                 <form action="{{ route('admin.projects.index') }}" method="GET">
-                    <div class="input-group">
+                    <div class="input-group mb-3">
+                        {{-- FITRLO PUBBLICAZIONE --}}
                         <select name="filter" class="form-select">
-                            <option value="">Tutti</option>
+                            <option value="">Tutti i progetti</option>
                             <option @if ($filter === 'published') selected @endif value="published">Completati</option>
                             <option @if ($filter === 'draft') selected @endif value="draft">Bozze</option>
+                        </select>
+                        <button class="btn btn-dark text-warning" type="submit">Filtra</button>
+                        {{-- FILTRO PER TIPOLOGIA --}}
+                    </div>
+                    <div class="input-group">
+                        <select name="type_filter" class="form-select">
+                            <option value="">Tutte le tipologie</option>
+                            @foreach ($types as $type)
+                                <option value="{{ $type->id }}" @if ($type_filter == $type->id) selected @endif>
+                                    {{ $type->label }}</option>
+                            @endforeach
                         </select>
                         <button class="btn btn-dark text-warning" type="submit">Filtra</button>
                     </div>
@@ -43,18 +55,20 @@
                             <td>{{ $project->title }}</td>
                             <td>{{ $project->slug }}</td>
                             <td>
-                                <span @if ($project->type) class="badge" style="background-color: {{ $project->type->color }}" @endif >{{ $project->type ? $project->type->label : '-' }}</span>
+                                <span
+                                    @if ($project->type) class="badge" style="background-color: {{ $project->type->color }}" @endif>{{ $project->type ? $project->type->label : '-' }}</span>
                             </td>
                             <td>
-                                <form action="{{ route('admin.projects.switch', $project->id) }}" method="POST" onclick="this.submit()">
-                                    @csrf 
+                                <form action="{{ route('admin.projects.switch', $project->id) }}" method="POST"
+                                    onclick="this.submit()">
+                                    @csrf
                                     @method('PATCH')
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="checkbox" role="button"
-                                            id="{{ 'is_published' .$project->id }}" @if ($project->is_published)
-                                                checked
-                                            @endif>
-                                        <label class="form-check-label" for="{{ 'is_published' .$project->id }}">{{ $project->is_published ? 'SI' : 'NO' }}</label>
+                                            id="{{ 'is_published' . $project->id }}"
+                                            @if ($project->is_published) checked @endif>
+                                        <label class="form-check-label"
+                                            for="{{ 'is_published' . $project->id }}">{{ $project->is_published ? 'SI' : 'NO' }}</label>
                                     </div>
                                 </form>
                             </td>
@@ -101,17 +115,19 @@
             <h4 class="text-center text-uppercase text-danger">Progetti per tipologia</h4>
             <ol class="list-group list-group- list-group-item-dark">
                 @foreach ($types as $type)
-                <li class="list-group-item d-flex justify-content-between align-items-start">
-                  <div>
-                    <div class="fw-bold">{{ $type->label }}</div>
-                        @forelse ($type->projects as $project)
-                            <small class="ms-3">- <a href="{{ route('admin.projects.show', $project->id) }}">{{ $project->title }} <br></a></small>
-                        @empty
-                            <small class="ms-3">- Nessun Progetto <br></small>
-                        @endforelse
-                  </div>
-                  <span class="badge text-bg-primary rounded-pill">{{ count($type->projects) }}</span>
-                </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div>
+                            <div class="fw-bold">{{ $type->label }}</div>
+                            @forelse ($type->projects as $project)
+                                <small class="ms-3">- <a
+                                        href="{{ route('admin.projects.show', $project->id) }}">{{ $project->title }}
+                                        <br></a></small>
+                            @empty
+                                <small class="ms-3">- Nessun Progetto <br></small>
+                            @endforelse
+                        </div>
+                        <span class="badge text-bg-primary rounded-pill">{{ count($type->projects) }}</span>
+                    </li>
                 @endforeach
             </ol>
         </div>
