@@ -6,6 +6,8 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use function PHPUnit\Framework\returnSelf;
+
 class Project extends Model
 {
     use HasFactory;
@@ -30,5 +32,11 @@ class Project extends Model
     /* FUNZIONE IMMAGINI */
     public function assetUrl(){
         return asset('storage/' . $this->image);
+    }
+
+    /* RELAZIONE CON IL MODELLO TYPE */
+    public function type() {
+        /* UN SOLO TYPE */
+        return $this->belongsTo(Type::class);
     }
 }
