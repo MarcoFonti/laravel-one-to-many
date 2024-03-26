@@ -29,7 +29,7 @@ class StoreProjectRequest extends FormRequest
             'content' => 'required|string',
             'image' => 'nullable|image',
             'is_published' => 'nullable|boolean',
-            'type_id' => 'nullable|exists:tipes,id'
+            'type_id' => 'nullable|exists:types,id'
         ];
     }
 
